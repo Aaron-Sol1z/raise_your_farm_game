@@ -1,4 +1,5 @@
 import random
+import animal_functions
 
 def intro():
     print("You are starting a farm of your own, but you have no crew.")
@@ -30,6 +31,15 @@ def restock(stock):
     stock["store_veggie_seeds"] += random.randint(2, 4)
     stock["store_fruit_seeds"] += random.randint(1, 3)
     print("The store has restocked.\n")
+    print("🏬____________________STORE____________________🏬")
+    print(f"Animals: {stock.get("store_cows")} 🐄 cows | {stock.get("store_chickens")} 🐔 chickens | {stock.get("store_sheep")} 🐑 sheep")
+    print(f"Seeds: {stock.get("store_veggie_seeds")} 🌱🥕 vegetable seeds | {stock.get("store_fruit_seeds")} 🌱🍏 fruit seeds")
+    print("🏬_____________________________________________🏬\n")
+
+def results(inventory):
+    print("The game is over. In the end, you have:")
+    list(inventory)
+    print(f"You ended with ${inventory.get("balance")}")
 
 def menu():
     print("_______________MAIN MENU________________")
@@ -83,13 +93,15 @@ def main():
                     print("Invalid input. You must enter a number.\n")
             if menu_choice == 1:
                 print("🐾 Heading to the animal barn. 🐾\n")
+                animal_functions.animals(inventory)
             elif menu_choice == 2:
                 print("🌾 Heading to the crop fields. 🌾\n")
+                inventory["energy"] -= 1
             elif menu_choice == 3:
                 print("🏬 Heading into town. 🏬\n")
-            inventory["energy"] -= 1
+                inventory["energy"] -= 1
         months += 1
-    print("The game is over.")
+    results(inventory)
 
 if __name__ == "__main__":
     main()
