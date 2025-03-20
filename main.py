@@ -1,5 +1,6 @@
 import random
 import animal_functions
+import crop_functions
 
 def intro():
     print("You are starting a farm of your own, but you have no crew.")
@@ -96,7 +97,7 @@ def main():
                 animal_functions.animals(inventory)
             elif menu_choice == 2:
                 print("🌾 Heading to the crop fields. 🌾\n")
-                inventory["energy"] -= 1
+                crop_functions.crops(inventory)
             elif menu_choice == 3:
                 print("🏬 Heading into town. 🏬\n")
                 inventory["energy"] -= 1
