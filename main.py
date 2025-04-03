@@ -1,6 +1,7 @@
 import random
 import animal_functions
 import crop_functions
+import town_functions
 
 def intro():
     print("You are starting a farm of your own, but you have no crew.")
@@ -41,6 +42,14 @@ def results(inventory):
     print("The game is over. In the end, you have:")
     list(inventory)
     print(f"You ended with ${inventory.get("balance")}")
+    if inventory["balance"] >= 10000:
+        print("Great job! You made a HUGE profit!")
+    elif inventory["balance"] > 5000:
+        print("Nice! You made profit.")
+    elif inventory["balance"] <= 5000:
+        print("Oof. You lost money. That's okay, farming is hard work.")
+    elif inventory["balance"] <= 0:
+        print("You're bankrupt. That's a lot of paperwork in the future.")
 
 def menu():
     print("_______________MAIN MENU________________")
@@ -76,7 +85,7 @@ def main():
         }
     intro()
 
-    while months != 2: # will be 6
+    while months != 1:
         inventory["energy"] = 4
         breakdown(months, inventory)
         restock(stock)
@@ -100,7 +109,8 @@ def main():
                 crop_functions.crops(inventory)
             elif menu_choice == 3:
                 print("🏬 Heading into town. 🏬\n")
-                inventory["energy"] -= 1
+                town_functions.town(inventory, stock)
+                # inventory["energy"] -= 1
         months += 1
     results(inventory)
 
